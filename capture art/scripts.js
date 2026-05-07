@@ -115,8 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const expandCards = document.querySelectorAll('.expand-card');
     expandCards.forEach(card => {
         card.addEventListener('click', () => {
+            const wasActive = card.classList.contains('active');
             expandCards.forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
+            if (!wasActive || window.innerWidth > 992) {
+                card.classList.add('active');
+                
+                // On mobile, scroll to the card nicely
+                if (window.innerWidth <= 992) {
+                    setTimeout(() => {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                }
+            }
         });
     });
 

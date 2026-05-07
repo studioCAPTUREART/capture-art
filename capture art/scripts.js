@@ -98,13 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
             start: "top 90%",
             once: true,
             onEnter: () => {
-                gsap.to(counter, {
-                    innerHTML: target,
+                let startValue = { val: 0 };
+                gsap.to(startValue, {
+                    val: target,
                     duration: 2,
-                    snap: { innerHTML: 1 },
                     ease: "power1.out",
-                    onUpdate: function() {
-                        counter.innerHTML = Math.ceil(this.targets()[0].innerHTML);
+                    onUpdate: () => {
+                        counter.innerHTML = Math.ceil(startValue.val);
                     }
                 });
             }
